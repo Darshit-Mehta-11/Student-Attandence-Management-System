@@ -13,6 +13,7 @@ env/
 
 # Environment variables
 .env
+secure.env
 
 # VS Code
 .vscode/
