@@ -1,0 +1,77 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %} <title>Semester/Result Form</title> {% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'results/form_result_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <div class="navbar_dashboard">
+        <div><strong>Result </strong></div>
+    </div>
+    {% if sem_not_found %}
+        <div class="result_not_found" id="result_not_found">
+            <p>{{ sem_not_found }}</p>
+            <i class='bx bx-x' onclick="disable();"></i>
+        </div>
+    {% endif %}
+
+    <div class="container">
+        <div class="form_container">
+            <h2>👇Check Your Result👇</h2>
+            <form method="post">
+                {% csrf_token %}
+                <label for="{{ form.sem.id_for_label }}" class="sem_label">
+                    {{ form.sem.label }}
+                </label><br>
+                {{ form.sem }}
+                <div class="btn">
+                    <button type="submit">View Result</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if result %}
+    <div class="result-display" style="margin-top:20px;">
+        <h3>Semester {{ result.sem }} Results</h3>
+        <table style="width:100%;border-collapse:collapse;">
+            <thead>
+                <tr>
+                    {% for hdr in subject_headers %}
+                    <th style="border:1px solid #ddd;padding:8px;">{{ hdr }}</th>
+                    {% endfor %}
+                    <th style="border:1px solid #ddd;padding:8px;">Total</th>
+                    <th style="border:1px solid #ddd;padding:8px;">%</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.seo }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.c_sharp }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.php }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.python }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.java }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.total_marks }}</td>
+                    <td style="border:1px solid #ddd;padding:8px;">{{ result.percentage|floatformat:2 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+    <script>
+        function disable(){
+            let msg = document.getElementById("result_not_found");
+            msg.style.display="none";
+        }
+        setTimeout(() => {
+            const msg = document.getElementById("result_not_found");
+            if (msg) {
+                msg.style.transition = "opacity 0.5s ease";
+                msg.style.opacity = "0";
+                setTimeout(() => msg.remove(), 1500);
+            }
+        }, 3000);
+    </script>
+{% endblock content %}

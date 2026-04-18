@@ -1,0 +1,115 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %}<title>Take Attendence</title>{% endblock title %} 
+    
+{% block style %}
+    <link rel="stylesheet" href="{% static 'teacher/take_attendance.css' %}">
+{% endblock style %}
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>Attendance </strong></div>
+</div>
+{% if attendance_taken %}
+    <div class="attendence_taken" id="disable_for_attendence">
+        <p>{{attendance_taken}}</p>
+        <i class='bx  bx-x' id="icon" onclick="disable();"></i>
+    </div>
+{% endif %}
+{% if attendance_already %}
+    <div class="attendence_already" id="disable_for_attendence">
+        <p>{{attendance_already}}</p>
+        <i class='bx  bx-x' id="icon" onclick="disable();"></i>
+    </div>
+{% endif %}
+<div class="container" id="attendance-container">
+    <h2>📋 Take Attendance</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="semester marks">
+            <label for="sem">Semester</label>
+            <select class="sem" name="semester" required>
+                <option value="" disabled selected>Select Semester</option>
+                <option value="1">1st</option>
+                <option value="2">2nd</option>
+                <option value="3">3rd</option>
+                <option value="4">4th</option>
+                <option value="5">5th</option>
+                <option value="6">6th</option>
+            </select>
+        </div>
+        <label>Select Date:</label>
+        <input type="date" name="date" value="{{ today|default:'' }}" required>
+        <table>
+            <thead>
+            <tr>
+                <th>Roll No</th>
+                <th>Student</th>
+                <th>Attendance</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{student.rollno}}</td>
+                <td>{{student.username }}</td>
+                <td>
+                    <label class="attendance-checkbox" data-student-id="{{student.id}}">
+                        <!-- checkbox hidden, visual handled by span -->
+                        <input type="checkbox" name="status_{{ student.id }}" value="Present">
+                        <span class="checkbox-label">A</span>
+                    </label>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <button type="submit">Save Attendance</button>
+    </form>
+    <!-- arrow indicator placeholder removed -->
+</div>
+<script>
+    function disable(){
+        let message = document.getElementById("disable_for_attendence");
+        message.style.display="none";
+    }
+    setTimeout(() => {
+            const msg = document.getElementById("disable_for_attendence");
+            if (msg) {
+                msg.style.transition = "opacity 0.5s ease";
+                msg.style.opacity = "0";
+                setTimeout(() => msg.remove(), 500);
+            }
+        }, 3000);
+
+    // attendance checkbox handling
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.attendance-checkbox input[type=checkbox]').forEach(chk => {
+            const label = chk.closest('.attendance-checkbox');
+            const row = chk.closest('tr');
+            // initialize state (unchecked=absent)
+            updateCheckbox(label, row, chk.checked);
+            chk.addEventListener('change', () => {
+                updateCheckbox(label, row, chk.checked);
+            });
+        });
+    });
+
+    function updateCheckbox(label, row, checked) {
+        if (checked) {
+            label.classList.add('checked');
+            label.querySelector('.checkbox-label').textContent = 'P';
+            row.classList.remove('absent');
+            row.classList.add('present');
+        } else {
+            label.classList.remove('checked');
+            label.querySelector('.checkbox-label').textContent = 'A';
+            row.classList.remove('present');
+            row.classList.add('absent');
+        }
+    }
+
+</script>
+{% endblock content %}
+

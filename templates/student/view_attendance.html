@@ -1,0 +1,51 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'student/attendance.css' %}">
+{% endblock style %}
+
+{% block title %}<title>{{student.username}}'s Attendance</title>{% endblock title %}
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>📋Attendance</strong></div>
+</div>
+<div class="main_container">
+    <div class="navbar_container">
+        {% if records %}
+            <h2>📋 {{student.username}}, Your Attendance Records </h2>
+            <p>Note : Attendance will be count if you are present full day schedule</p>
+            <table border="1" cellpadding="10px" cellspacing="0px">
+                <thead> 
+                    <tr>
+                        <th>#</th>
+                        <th>Semester</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                    <tr class="status-{{ record.status|lower }}">
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ record.get_semester }}</td>
+                        <td>{{ record.date }}</td>
+                        <td>{{ record.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p> ❌ No attendance records found. ❌ </p>
+            <h3>Example records</h3>
+            <table border="1" cellpadding="10px" cellspacing="0px">
+                <tr><th>#</th><th>Semester</th><th>Date</th><th>Status</th></tr>
+                <tr class="status-present"><td>1</td><td>1st</td><td>2025-10-01</td><td>Present</td></tr>
+                <tr class="status-absent"><td>2</td><td>1st</td><td>2025-10-02</td><td>Absent</td></tr>
+                <tr class="status-leave"><td>3</td><td>1st</td><td>2025-10-03</td><td>Leave</td></tr>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

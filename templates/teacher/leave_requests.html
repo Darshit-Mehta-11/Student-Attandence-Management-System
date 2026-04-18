@@ -1,0 +1,90 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+{% block title %}<title>Leave Requests</title>{% endblock title %}
+{% block content %}
+<style>
+.request-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.request-card h3 {
+    margin: 0 0 8px;
+}
+.request-actions a {
+    margin-right: 10px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+}
+.request-actions .approve { background: #28a745; }
+.request-actions .reject { background: #dc3545; }
+</style>
+<h1>Leave Requests</h1>
+{% if pending %}
+    <table id="requests-table" style="width:100%; border-collapse: collapse;">
+    <style>
+        a.approve { color: white; background: #28a745; padding: 4px 8px; border-radius:4px; text-decoration:none; }
+        a.reject { color: white; background: #dc3545; padding: 4px 8px; border-radius:4px; text-decoration:none; }
+    </style>
+        <thead>
+            <tr>
+                <th style="border:1px solid #ddd; padding:8px;">Student</th>
+                <th style="border:1px solid #ddd; padding:8px;">Date</th>
+                <th style="border:1px solid #ddd; padding:8px;">Reason</th>
+                <th style="border:1px solid #ddd; padding:8px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lr in pending %}
+            <tr data-pk="{{ lr.pk }}">
+                <td style="border:1px solid #ddd; padding:8px;">{{ lr.student.username }}</td>
+                <td style="border:1px solid #ddd; padding:8px;">{{ lr.date }}</td>
+                <td style="border:1px solid #ddd; padding:8px;">{{ lr.reason }}</td>
+                <td style="border:1px solid #ddd; padding:8px;">
+                    <a class="approve" href="{% url 'approve_leave' lr.pk %}">Approve</a>
+                    <a class="reject" href="{% url 'reject_leave' lr.pk %}">Reject</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>No pending leave requests.</p>
+{% endif %}
+<p><a href="{% url 'teacher_dashboard' %}">Back to dashboard</a></p>
+
+<script>
+// keep same confirmation / removal logic adapted for table rows
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a.approve, a.reject').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const action = this.classList.contains('approve') ? 'approve' : 'reject';
+            const msg = action === 'approve' ?
+                        'Are you sure you want to approve this leave?':
+                        'Are you sure you want to reject this leave? This will delete the request.';
+            if (!confirm(msg)) return;
+            fetch(this.href, {method: 'GET', credentials: 'same-origin'})
+                .then(resp => {
+                    if (!resp.ok) throw new Error('Network error');
+                    if (action === 'reject') {
+                        const row = this.closest('tr');
+                        if (row) row.remove();
+                    } else {
+                        window.location.reload();
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    window.location.reload();
+                });
+        });
+    });
+});
+</script>
+
+{% endblock content %}

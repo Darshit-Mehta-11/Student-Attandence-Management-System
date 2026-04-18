@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 0px 30px 0px;
+}
+.navbar_dashboard {
+    background: linear-gradient(90deg, #4f46e5, #3b82f6);
+    color: white;
+    padding: 30px 30px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.form-container {
+    background-color: #ffffff; /* White background for the form */
+    padding: 2rem;
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Shadow effect */
+    width: 100%;
+    max-width: 23rem; /* Max width to keep it from getting too wide on large screens */
+}
+
+.form-title {
+    font-size: 1.875rem; /* 3xl */
+    font-weight: 700; /* bold */
+    color: #1f2937; /* Gray-800 */
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.form-description {
+    color: #6b7280; /* Gray-500 */
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    display: block;
+    color: #374151; /* Gray-700 */
+    font-size: 0.875rem; /* sm */
+    font-weight: 600; /* semibold */
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    width: 90%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db; /* Gray-300 border */
+    border-radius: 0.5rem;
+    outline: none;
+    transition: all 200ms ease-in-out;
+}
+
+.form-input:focus {
+    border-color: #3b82f6; /* Blue-500 */
+    box-shadow: 0 0 0 2px #bfdbfe; /* Focus ring */
+}
+
+.form-button {
+    width: 100%;
+    background-color: #2563eb; /* Blue-600 */
+    color: #ffffff;
+    font-weight: 700; /* bold */
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 200ms ease-in-out;
+}
+
+.form-button:hover {
+    background-color: #1d4ed8; /* Blue-700 */
+}
+

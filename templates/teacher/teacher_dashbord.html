@@ -1,0 +1,83 @@
+{% extends "Homepage/home.html" %} 
+{% load static %} 
+{% block title %}<title>Teacher's Dashbord</title>{% endblock title %} 
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'teacher/teacher_dashbord.css' %}" />
+{% endblock style %} 
+
+{% block content %}
+
+
+{% if messages %} 
+  {% for message in messages%}
+    <div id="password_success_message">
+      <p style="font-weight: bold; color: blue; font-size: 22px">{{message}}</p>
+      <i class="bx bx-x" style="color: #ffffff;font-size: 30px;position: fixed;right: 10px;top: 172px;cursor: pointer;" onclick="disable();"></i>
+    </div>
+  {% endfor %} 
+{% endif %}
+
+<div class="container">
+  <div class="profile-header">
+    <h1>Welcome, <span class="highlight">{{teacher.username}} sir</span></h1>
+    <p>
+      <a href="{% url 'take_attendance' %}">Take Attendance</a>
+      <a href="{% url 'leave_requests' %}">Leave Requests</a>
+    </p>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <h3>Total Students</h3>
+      <p>{{ total_students }}</p>
+    </div>
+    <div class="card">
+      <h3>Assignments Given</h3>
+      <p>24</p>
+    </div>
+    <div class="card">
+      <h3>Pending Leaves</h3>
+      <p>{{ pending_leaves }}</p>
+    </div>
+    <div class="card">
+      <h3>Pending Reviews</h3>
+      <p>8</p>
+    </div>
+    <div class="card">
+      <h3>Attendance Reports</h3>
+      <p>5</p>
+    </div>
+  </div>
+
+  <div class="bottom-section">
+    <div class="table">
+      <h2>Students</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for stu in students %}
+          <tr>
+            <td>{{ stu.username }}</td>
+            <td>{{ stu.email }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="2">No students registered yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+  function disable() {
+    let msg = document.getElementById("password_success_message");
+    if (msg) msg.style.display = "none";
+  }
+</script>
+{% endblock content %}

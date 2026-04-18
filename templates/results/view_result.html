@@ -1,0 +1,120 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %} <title>Result for Semester : {{ result.sem }}</title> {% endblock title %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'results/view_result_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+    <div class="container_view_result">
+        {% if result %}
+            <div class="result_conatiner">
+                <h3 class="Result_semester_header"><i class='bx bxs-award'></i> Academic Transcript</h3>
+                <div class="header">Student Details</div>
+                <div class="sd">
+                    <table>
+                        <tr>
+                            <td><strong><i class='bx bx-user'></i> Name:</strong> {{ result.student }}</td>
+                            <td><strong><i class='bx bx-id-card'></i> Roll No:</strong> {{ result.student.rollno }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong><i class='bx bx-calendar'></i> Year:</strong> {{ result.ac_year }}</td>
+                            <td><strong><i class='bx bx-male-female'></i> Father:</strong> {{ result.student.father_name }}</td>
+                        </tr>
+                        <tr>
+                            <td><strong><i class='bx bx-calendar-heart'></i> DOB:</strong> {{ result.student.dob }}</td>
+                            <td><strong><i class='bx bx-book-bookmark'></i> Stream:</strong> {{ result.student.stream }}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="result_detail">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Min Marks</th>
+                                <th>Obtained</th>
+                                <th>Max Marks</th>
+                                <th>Grade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in marks_data %}
+                                <tr>
+                                    <td>{{ item.label }}</td>
+                                    <td>33</td>
+                                    <td>{{ item.value }}</td>
+                                    <td>100</td>
+                                    <td>
+                                        <span class="badge {% if item.value >= 33 %}badge-success{% else %}badge-danger{% endif %}">
+                                            {% if item.value >= 90 %}A+{% elif item.value >= 80 %}A{% elif item.value >= 70 %}B{% elif item.value >= 60 %}C{% elif item.value >= 33 %}P{% else %}F{% endif %}
+                                        </span>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                {% if result.seo >= 33 and result.c_sharp >= 33 and result.php >= 33 and result.python >= 33 and result.java >= 33 %}
+                    <div class="pass_or_fail_message">
+                        <i class='bx bxs-check-circle' style="font-size: 2rem;"></i>
+                        <span>Congratulations! You have passed the Semester {{ result.sem }} examination.</span>
+                    </div>
+                {% else %}
+                    <div class="pass_or_fail_message" style="background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2;">
+                        <i class='bx bxs-error-circle' style="font-size: 2rem;"></i>
+                        <span>Results show one or more subjects require reassessment.</span>
+                    </div>
+                {% endif %}
+
+                <div class="result_percentage_detail">
+                    {% with no=result.get_summary %}
+                    <table>
+                        <tr>
+                            <th>Total Obtained</th>
+                            <th>Aggregate %</th>
+                            <th>Final Status</th>
+                        </tr>
+                        <tr>
+                            <td>{{ no.total_marks }} / 500</td>
+                            <td style="color: var(--primary);">{{ no.percentage }}%</td>
+                            <td>
+                                {% if no.percentage >= 33 and no.fail_count == 0 %}
+                                    <span class="badge badge-success">Pass</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Fail</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
+                    {% endwith %}
+                </div>
+
+                <div style="display: flex; justify-content: center; gap: 20px; padding-bottom: 40px;">
+                    <a href="{% url 'download_result' result.id %}" class="a_for_result_back">
+                        <button class="btn_for_result_back">
+                            <i class='bx bx-download'></i> Download PDF
+                        </button>
+                    </a>
+                    <a href="{% url 'student_dashboard' %}" class="a_for_result_back">
+                        <button class="btn_for_result_back" style="background: var(--secondary);">
+                            <i class='bx bx-arrow-back'></i> Go Back
+                        </button>
+                    </a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
+
+    <script>
+        function disable(){
+            let msg = document.getElementById("result_not_found");
+            msg.style.display="none";
+        }
+    </script>
+{% endblock content %}

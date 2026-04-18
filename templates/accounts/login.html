@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'accounts/login_style.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="container">
+        <div id="login-container">
+            <h1>Welcome Back!</h1>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="role">Role</label>
+                    <select name="role" required>
+                        <option value="" disabled {% if not role %}selected{% endif %}>Select your role</option>
+                        <option value="student" {% if role == 'student' %}selected{% endif %}>Student</option>
+                        <option value="teacher" {% if role == 'teacher' %}selected{% endif %}>Teacher</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" value="{{ username|default:'' }}" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                {% if messages %}
+                    {% for message in messages%}
+                        <div id="password_success_message">
+                            <p class="error_message_p">{{message}}</p>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+
+                <button type="submit">Login</button>
+            </form>
+            <p>Don't have an account? <a href="{% url 'student_register' %}">Sign Up</a></p>
+            <p><a href="{% url 'forgot_password' %}">Forgot Password?</a></p>
+            <div class="back_btn">
+                <a href="/" class="back"><i class='bx  bx-reply'  style='color:white;font-size:28px;position: relative;right:5px;'></i>Go Back</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

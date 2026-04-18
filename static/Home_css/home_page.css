@@ -1,0 +1,292 @@
+/* ====== Premium General Styles ====== */
+body {
+    background-color: #f8fafc;
+    color: #0f172a;
+    overflow-x: hidden;
+}
+
+.section-title {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: #1e293b;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.section-text {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #64748b;
+    font-size: 1.15rem;
+    line-height: 1.6;
+}
+
+/* ====== Hero Section ====== */
+.hero-section {
+    position: relative;
+    padding: 100px 0 80px;
+    background: radial-gradient(circle at top right, #e0e7ff 0%, #f8fafc 100%);
+    overflow: hidden;
+}
+
+.hero-bg-shape {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(135deg, #c4b5fd 0%, #93c5fd 100%);
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: 0;
+    border-radius: 50%;
+}
+
+.hero-content, .hero-image-wrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #eff6ff;
+    color: #2563eb;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    border: 1px solid #bfdbfe;
+}
+
+.hero-title {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    color: #0f172a;
+    margin-bottom: 25px;
+}
+
+.hero-title span {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    font-size: 1.25rem;
+    color: #64748b;
+    margin-bottom: 35px;
+}
+
+.hero-image-wrapper img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* ====== Carousel ====== */
+.carousel-inner {
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+/* ====== Features ====== */
+.features-section {
+    background: #ffffff;
+    position: relative;
+}
+
+.feature-card {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    border-radius: 20px;
+    padding: 40px 30px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.1);
+    border-color: #e2e8f0;
+}
+
+.feature-card:hover::before {
+    opacity: 1;
+}
+
+.icon-box {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.icon-blue { background: #eff6ff; color: #3b82f6; }
+.icon-green { background: #f0fdf4; color: #22c55e; }
+.icon-orange { background: #fff7ed; color: #f97316; }
+.icon-red { background: #fef2f2; color: #ef4444; }
+
+.feature-card h5 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #64748b;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+/* ====== Roles ====== */
+.roles-section {
+    background: #f8fafc;
+}
+
+.role-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f1f5f9;
+    transition: all 0.4s ease;
+}
+
+.role-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+.role-img-wrap {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 25px;
+    background: #f1f5f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+}
+
+.role-card:hover .role-img-wrap {
+    transform: rotate(10deg);
+}
+
+.role-card h5 {
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: #1e293b;
+    margin-bottom: 15px;
+}
+
+.role-card p {
+    color: #64748b;
+    font-size: 1rem;
+}
+
+/* ====== CTA Section ====== */
+.cta-section {
+    position: relative;
+    padding: 0 20px;
+}
+
+.cta-box {
+    background: linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%);
+    border-radius: 30px;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.4);
+}
+
+.cta-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+    animation: rotateBg 20s linear infinite;
+    z-index: 0;
+}
+
+@keyframes rotateBg {
+    0% { transform: rotate(0deg) translate(-25%, -25%); }
+    100% { transform: rotate(360deg) translate(-25%, -25%); }
+}
+
+.cta-title {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.btn-gradient {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #ffffff;
+    color: #4f46e5;
+    padding: 16px 42px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn-gradient:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    color: #3b82f6;
+}
+
+/* Ensure no text styling gets overwritten */
+a.btn-gradient:hover {
+    color: #3b82f6;
+}

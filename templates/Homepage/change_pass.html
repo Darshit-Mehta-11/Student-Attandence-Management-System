@@ -1,0 +1,76 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %}<title>Change Password</title>{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'Home_css/change_pass.css'%}">
+{% endblock style %}
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>Change Password </strong></div>
+</div>
+<div class="container">
+<div class="form-container">
+    <h2 class="form-title">Change Password</h2>
+    <p class="form-description">
+        Please enter your old password and a new password.
+    </p>
+
+    <form method="POST">
+        <!-- Old Password Field -->
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="old-password" class="form-label">Old Password</label>
+            <input
+                type="password"
+                id="old-password"
+                name="old-password"
+                placeholder="Enter your old password"
+                required
+                class="form-input"
+            >
+        </div>
+
+        <!-- New Password Field -->
+        <div class="form-group">
+            <label for="new-password" class="form-label">New Password</label>
+            <input
+                type="password"
+                id="new-password"
+                name="new-password"
+                placeholder="Enter your new password"
+                required
+                class="form-input"
+            >
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-group">
+            <label for="confirm-password" class="form-label">Confirm Password</label>
+            <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+                placeholder="Confirm your new password"
+                required
+                class="form-input"
+            >
+        </div>
+        {% if messages %}
+            {% for message in  messages%}
+                <p style="text-align:center;font-weight:bold;color:red;">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <!-- Submit Button -->
+        <button
+            type="submit"
+            class="form-button"
+        >
+            Reset Password
+        </button>
+    </form>
+</div>
+</div>
+{% endblock %}

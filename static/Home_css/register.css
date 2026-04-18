@@ -1,0 +1,94 @@
+/* Basic Reset and Setup */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center; /* Center the form horizontally */
+    align-items: center;   /* Center the form vertically */
+    min-height: 100vh;     /* Ensure full viewport height */
+    margin: 0;
+}
+
+/* Form Container Styling */
+.form-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Limit the form width */
+    text-align: center;
+}
+
+/* Heading Styling */
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+}
+
+/* Input Group Layout */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+/* Label Styling */
+label {
+    display: block; /* Make label take full width */
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* Input Field Styling */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Include padding/border in element's total width/height */
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff; /* Highlight on focus */
+    outline: none;
+}
+
+/* Sign-up Button Styling */
+.signup-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Login Link Styling */
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-link a {
+    color: #007bff;
+    text-decoration: none; /* Remove underline */
+}
+
+.login-link a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}

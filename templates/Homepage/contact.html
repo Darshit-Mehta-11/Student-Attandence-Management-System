@@ -1,0 +1,63 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %}<title>Contact-Us Page</title>{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'Home_css/contact_us.css'%}">
+{% endblock style %}
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>Contact-Us </strong></div>
+</div>
+<div class="container_contact">
+{% if success %}
+    <div class="success_contact_message" id="msg_for_desible">
+        <p>Your Message Send Successfully<i class='bx  bx-x' id="contact_message" style='color:#ffffff;font-size:30px;position:fixed;right:10px;top:157px;cursor: pointer;'onclick="disable();"></i> </p>
+    </div>
+{% endif %}
+    <div class="container">
+        <header>
+            <h1>Contact Us</h1>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>Send us a message</h2>
+                <p style="text-align:center;">We'd love to hear from you! Please fill out the form below, and we'll get back to you as soon as possible.</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+
+            <section class="card">
+                <h2>Our Office</h2>
+                <div class="contact-info">
+                    <p><strong>Address:</strong> 123 Digital Street, Schoolville, SV 45678</p>
+                    <p><strong>Phone:</strong> +1 (123) 456-7890</p>
+                    <p><strong>Email:</strong> info@studentmanagementsystem.com</p>
+                </div>
+            </section>
+        </main>
+    </div>
+<script>
+    function disable(){
+        let msg = document.getElementById("msg_for_desible");
+        msg.style.display="none";
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+{% load result_extras %}
+{% block title %}<title>{{ student.username }} Results</title>{% endblock title %}
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>📊 Results</strong></div>
+</div>
+<div class="container">
+    <h2>{{ student.username }}, Your Results</h2>
+    {% if results %}
+    <table style="width:100%;border-collapse:collapse;">
+        <thead>
+            <tr>
+                <th style="border:1px solid #ddd;padding:8px;">Semester</th>
+                {% comment %} Headers will be filled by view via context %}{% endcomment %}
+                {% for hdr in subject_headers %}
+                <th style="border:1px solid #ddd;padding:8px;">{{ hdr }}</th>
+                {% endfor %}
+                <th style="border:1px solid #ddd;padding:8px;">Total</th>
+                <th style="border:1px solid #ddd;padding:8px;">%</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for res in results %}
+            <tr>
+                <td style="border:1px solid #ddd;padding:8px;">{{ res.sem }}</td>
+                {% for attr in value_fields %}
+                <td style="border:1px solid #ddd;padding:8px;">{{ res|attr:attr }}</td>
+                {% endfor %}
+                <td style="border:1px solid #ddd;padding:8px;">{{ res.total_marks }}</td>
+                <td style="border:1px solid #ddd;padding:8px;">{{ res.percentage|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No results uploaded yet.</p>
+    {% endif %}
+    <p><a href="{% url 'student_dashboard' %}">Back to dashboard</a></p>
+</div>
+{% endblock content %}

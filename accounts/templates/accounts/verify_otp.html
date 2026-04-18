@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        /* General Body Styling - Consistent with Forgot Password page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Form Container Styling */
+        .otp-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        /* Message Styling (Changed to red for potential error messages) */
+        .message-container p {
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .message-error {
+            color: #721c24; /* Dark red text */
+            background-color: #f8d7da; /* Light red background */
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Form Element Styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            /* Added specific style for OTP field to encourage centering text */
+            text-align: center;
+            letter-spacing: 5px; /* Spacing for OTP digits */
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            background-color: #28a745; /* Green color for 'Verify' */
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1e7e34; /* Darker green on hover */
+        }
+        .back_btn{
+            margin: 10px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 25px;
+            transition: transform 0.7s;
+            background-color: #6a11cb;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back:hover{
+            transform: translateY(-3px);
+            box-shadow: 0px 2px 4px #555;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>Verify OTP</h2>
+        
+        <div class="message-container">
+            {% if messages %}
+                {% for msg in messages %}
+                    <p class="message-error">{{ msg }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="otp" placeholder="Enter 6-digit OTP" 
+                   maxlength="6" pattern="\d{6}" title="OTP must be 6 digits" required>
+            <button type="submit">Verify</button>
+        </form>
+        <p style="margin-top: 15px;"><a href="#" style="color: #007bff; text-decoration: none;">Resend OTP</a></p>
+        <div class="back_btn">
+            <a href="{% url 'login' %}" class="back"><i class='bx  bx-reply'  style='color:white;font-size:28px;position: relative;right:5px;'></i>Go Back</a>
+        </div>
+    </div>
+</body>
+</html>

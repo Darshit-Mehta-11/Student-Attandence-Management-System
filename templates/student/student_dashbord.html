@@ -1,0 +1,108 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+{% block title %}<title>Student Dashbord</title>{% endblock title %} 
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'student/student_dashbord_style.css' %}">
+{% endblock style %}
+
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>📋 Student Dashboard</strong></div>
+</div>
+
+{% if messages %}
+    {% for message in messages %}
+    <div class="password_success_change" id="password_success_message">
+        <p>{{ message }}</p>
+        <i class='bx bx-x' onclick="disable();"></i>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container">
+    <div class="profile">
+        <h3>👋 Welcome, {{ student.username }}</h3>
+        <p><strong>Email:</strong> {{ student.email }}</p>
+        <p><strong>Roll No:</strong> {{ student.rollno }}</p>
+        <p><strong>Stream:</strong> {{ student.stream }}</p>
+        <p><a href="{% url 'request_leave' %}">Request Leave</a> | <a href="{% url 'student_results' %}">View Results</a></p>
+    </div>
+
+    <div class="card">
+        <h4>📘 Subjects Enrolled</h4>
+        {% if subjects %}
+            <ul>
+            {% for s in subjects %}
+                <li>{{ s }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No subjects assigned yet.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h4>🔔 Notifications</h4>
+        {% if notifications %}
+            <ul>
+            {% for note in notifications %}
+                <li>{{ note.message }} <small>({{ note.created_at|date:"M d" }})</small></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No new notifications.</p>
+        {% endif %}
+    </div>
+
+    <div class="card">
+        <h4>📅 Timetable</h4>
+        <div class="time_table">
+            {% if timetable %}
+            <table style="width:100%;border-collapse:collapse;">
+                <thead>
+                    <tr>
+                        <th style="border:1px solid #ddd;padding:8px;">Day</th>
+                        <th style="border:1px solid #ddd;padding:8px;">Period 1</th>
+                        <th style="border:1px solid #ddd;padding:8px;">Period 2</th>
+                        <th style="border:1px solid #ddd;padding:8px;">Period 3</th>
+                        <th style="border:1px solid #ddd;padding:8px;">Period 4</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in timetable %}
+                    <tr>
+                        <td style="border:1px solid #ddd;padding:8px;">{{ row.day }}</td>
+                        <td style="border:1px solid #ddd;padding:8px;">{{ row.period1 }}</td>
+                        <td style="border:1px solid #ddd;padding:8px;">{{ row.period2 }}</td>
+                        <td style="border:1px solid #ddd;padding:8px;">{{ row.period3 }}</td>
+                        <td style="border:1px solid #ddd;padding:8px;">{{ row.period4 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+                <p>No timetable available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    function disable(){
+        let msg = document.getElementById("password_success_message");
+        if (msg) msg.style.display="none";
+    }
+
+    setTimeout(() => {
+        const msg = document.getElementById("password_success_message");
+        if (msg) {
+            msg.style.transition = "opacity 0.5s ease";
+            msg.style.opacity = "0";
+            setTimeout(() => msg.remove(), 1500);
+        }
+    }, 3000);
+
+</script>
+{% endblock content %}

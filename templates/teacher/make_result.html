@@ -1,0 +1,99 @@
+{% extends "Homepage/home.html" %}
+{% load static %}
+
+{% block title %}<title>Set Result</title>{% endblock title %} 
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'teacher/make_result_style.css' %}">
+{% endblock style %}
+
+{% block content %}
+<div class="navbar_dashboard">
+    <div><strong>Result </strong></div>
+</div>
+{% if mark_submit %}
+    <div class="Marks_submited" id="id_for_disable">
+        <p>{{mark_submit}}</p>
+        <i class='bx  bx-x' id="icon" onclick="disable();"></i>
+    </div>
+{% endif %}
+{% if error_message %}
+    <div class="Marks_submited" id="id_for_disable">
+        <p>{{error_message}}</p>
+        <i class='bx  bx-x' id="icon" onclick="disable();"></i>
+    </div>
+{% endif %}
+{% if marks_already_submit %}
+    <div class="marks_already_submit" id="id_for_disable">
+        <p>{{marks_already_submit}}</p>
+        <i class='bx  bx-x' id="icon" onclick="disable();"></i>
+    </div>
+{% endif %}
+<h2>Set Marks</h2>
+<div class="container_set_result">
+    <form method="post">
+        {% csrf_token %}
+        <div class="studnts_list" >
+            <label for="label_for_students">👇Select student to enter marks👇</label>
+            <select class="students" name="students" required>
+                <option value="default" disabled selected>Select student</option>
+                {% for student in  students%}
+                    <option value={{student.username}}>{{student.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="marks_input">
+            <h2>Enter Marks Of Student</h2>
+            <div class="semester marks">
+                <label for="sem">Semester</label>
+                <select class="sem" name="semester" required>
+                    <option value="default" disabled selected>Select Semester</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+            </div>
+            <div class="mark_seo marks">
+                <label for="Seo">SEO</label>
+                <input type="number" id="seo" name="seo" placeholder="Enter marks seo" required>
+            </div>
+            <div class="mark_c marks">
+                <label for="c#">C#</label>
+                <input type="number" id="c" name="c" placeholder="Enter marks c#" required>
+            </div>
+            <div class="mark_php marks">
+                <label for="php">PHP</label>
+                <input type="number" id="php" name="php" placeholder="Enter marks php" required>
+            </div>
+            <div class="mark_python marks">
+                <label for="python">PYTHON</label>
+                <input type="number" id="python" name="python" placeholder="Enter marks python" required>
+            </div>
+            <div class="mark_java marks">
+                <label for="java">JAVA</label>
+                <input type="number" id="java" name="java" placeholder="Enter marks java" required>
+            </div>
+        </div>
+        <div class="btn">
+            <button type="submit">Enter marks</button>
+        </div>
+    </form>
+</div>
+<script>
+    function disable(){
+        let msg = document.getElementById("id_for_disable");
+        msg.style.display="none";
+    }
+    setTimeout(() => {
+            const msg = document.getElementById("id_for_disable");
+            if (msg) {
+                msg.style.transition = "opacity 0.5s ease";
+                msg.style.opacity = "0";
+                setTimeout(() => msg.remove(), 1500);
+            }
+        }, 3000);
+</script>
+{% endblock content %}

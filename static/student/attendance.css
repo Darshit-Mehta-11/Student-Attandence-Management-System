@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+.navbar_dashboard {
+    background: linear-gradient(90deg, #4f46e5, #3b82f6);
+    color: white;
+    padding: 30px 30px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.main_container{
+    height: 78vh;
+    display: flex;
+    justify-content: center;
+}
+.navbar_container {
+    height:fit-content;
+    width: 60vw;
+    margin-top: 20px;
+    padding: 30px;
+    background-color:rgba(255, 255, 255, 0.356);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    border:2px ridge rgb(52, 16, 255);
+}
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}
+th {
+    background-color: #007bff;
+    color: white;
+}
+td, th {
+    text-align: center;
+    padding: 10px;
+    border:none;
+
+}
+tr:nth-child(even) {
+    background-color: #e7e7e7;
+}
+
+/* status colors */
+.status-present {
+    background-color: #d4edda;
+    color: #155724;
+}
+.status-absent {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+.status-leave {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+h2,p{
+    text-align: center;
+}

@@ -1,0 +1,174 @@
+/* ─── Detailed Result View — Premium Transcript ─── */
+
+.container_view_result {
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.result_conatiner {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    position: relative;
+}
+
+/* Header with Semester Info */
+.Result_semester_header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: white;
+    padding: 40px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0 !important;
+    letter-spacing: -1px;
+}
+
+.header {
+    background: #f8fafc;
+    color: var(--text-muted);
+    padding: 15px;
+    text-align: center !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* Student Details Panel */
+.sd {
+    padding: 40px;
+    background: #ffffff;
+}
+
+.sd table {
+    width: 100%;
+    border: none !important;
+}
+
+.sd td {
+    border: none !important;
+    padding: 15px 10px;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+/* Result Table Customization */
+.result_detail {
+    padding: 0 40px 40px;
+}
+
+.result_detail table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.result_detail th {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    padding: 15px;
+    text-align: left;
+    font-size: 0.85rem;
+    border-bottom: 2px solid var(--border);
+    border: none !important;
+}
+
+.result_detail td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-weight: 600;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+}
+
+.result_detail tr:hover {
+    background: #fdfdff;
+}
+
+/* Success/Fail Message */
+.pass_or_fail_message {
+    margin: 30px 40px;
+    padding: 24px;
+    border-radius: var(--radius-md);
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    border: none !important;
+    background: #ecfdf5;
+    color: var(--success);
+}
+
+/* Aggregate Stats Table */
+.result_percentage_detail {
+    margin: 0 40px 40px;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    padding: 25px;
+    border: 1px solid var(--border);
+}
+
+.result_percentage_detail table th {
+    background: transparent;
+    border: none !important;
+    text-align: center;
+}
+
+.result_percentage_detail table td {
+    border: none !important;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 10px;
+}
+
+/* Buttons */
+.a_for_result_back {
+    display: inline-flex;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.btn_for_result_back {
+    padding: 15px 35px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: auto !important;
+}
+
+.btn_for_result_back:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+    filter: brightness(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sd td { width: 100%; display: block; }
+    .Result_semester_header { font-size: 1.5rem; padding: 25px; }
+    .sd, .result_detail, .result_percentage_detail { padding: 20px; }
+    .result_detail, .result_percentage_detail { margin: 0 20px 20px; }
+}
